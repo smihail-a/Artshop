@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "Artshop API",
                 version = "1.0",
-                description = "REST API for artists to upload, sell, and review artwork"
+                description = "REST API for artists to upload, sell their art"
         )
 )
 public class OpenApiConfig {
