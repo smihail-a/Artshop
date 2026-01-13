@@ -61,7 +61,7 @@ class ReviewServiceTest {
         );
         artwork2.setId(200L);
 
-        review2 = new Reviews(user, artwork2, 4, "I like it");
+        review2 = new Reviews(user, artwork2, 4, "Love it");
         review2.setId(2L);
 
     }
@@ -80,14 +80,17 @@ class ReviewServiceTest {
     @Test
     void testGetReviewsByArtwork() {
         Long artworkId = 100L;
+
+        // Only review1 belongs to artwork1
         when(reviewRepository.findByArtworkId(artworkId))
-                .thenReturn(Arrays.asList(review1, review2));
+                .thenReturn(Arrays.asList(review1));
 
         List<Reviews> reviews = reviewService.getReviewsByArtwork(artworkId);
 
-        assertEquals(2, reviews.size());
+        assertEquals(1, reviews.size()); // Only 1 review for artwork1
         assertEquals("Amazing artwork!", reviews.get(0).getComment());
-        assertEquals("Loved it!", reviews.get(1).getComment());
+
         verify(reviewRepository, times(1)).findByArtworkId(artworkId);
     }
+
 }
