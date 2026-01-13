@@ -43,42 +43,35 @@ class FavouriteServiceTest {
         user.setEmail("email5@yahoo.com");
         user.setRole(Role.USER);
 
-        artwork1 = new Artwork();
+        user = new Users("john_doe", "password123", Role.USER, "john@example.com");
+        user.setId(1L);
+
+        artwork1 = new Artwork(
+                "Starry Night",
+                "Famous painting",
+                new BigDecimal("1000"),
+                "http://example.com/image.jpg",
+                user,
+                null
+        );
         artwork1.setId(100L);
-        artwork1.setImageUrl("imageurl1.com");
-        artwork1.setTitle("title1");
-        artwork1.setDescription("description1");
-        category=new Categories();
-        category.setId(1L);
-        category.setName("digital_art");
-        artwork1.setCategories(category);
-        artist=new Users();
-        artist.setId(1L);
-        artist.setUsername("John");
-        artist.setPassword("password1");
-        artist.setEmail("email1@gmail.com");
-        artist.setRole(Role.ARTIST);
-        artwork1.setArtist(artist);
-        artwork1.setPrice(new BigDecimal(500));
 
-        artwork2 = new Artwork();
-        artwork2.setId(101L);
-        artwork2.setImageUrl("imageurl2.com");
-        artwork2.setTitle("title2");
-        artwork2.setDescription("description2");
-        artwork1.setCategories(category);
-        artwork2.setArtist(artist);
-        artwork2.setPrice(new BigDecimal(300));
-
-        favourite1 = new Favourites();
+        favourite1 = new Favourites(user, artwork1);
         favourite1.setId(1L);
-        favourite1.setUser(user);
-        favourite1.setArtwork(artwork1);
 
-        favourite2 = new Favourites();
-        favourite2.setId(2L);
-        favourite2.setUser(user);
-        favourite2.setArtwork(artwork2);
+        artwork2 = new Artwork(
+                "Night",
+                "painting",
+                new BigDecimal("500"),
+                "http://example.com/imagenight.jpg",
+                user,
+                null
+        );
+        artwork2.setId(100L);
+
+        favourite2 = new Favourites(user, artwork2);
+        favourite2.setId(1L);
+
     }
 
     @Test

@@ -26,12 +26,8 @@ class UserServiceTest {
 
     @Test
     void createUser_success() {
-        Users user = new Users();
+        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
         user.setId(1L);
-        user.setEmail("test@email.com");
-        user.setPassword("test12345");
-        user.setUsername("john14");
-        user.setRole(Role.USER);
 
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(false);
         when(userRepository.save(user)).thenReturn(user);
@@ -44,12 +40,8 @@ class UserServiceTest {
 
     @Test
     void createUser_duplicateEmail_throwsException() {
-        Users user = new Users();
+        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
         user.setId(1L);
-        user.setEmail("test@email.com");
-        user.setPassword("test12345");
-        user.setUsername("john");
-        user.setRole(Role.USER);
 
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(true);
 

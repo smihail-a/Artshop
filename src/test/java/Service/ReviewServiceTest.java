@@ -28,48 +28,42 @@ class ReviewServiceTest {
     private Reviews review2;
     private Artwork artwork1;
     private Artwork artwork2;
-    private Users artist;
+    private Users user;
     private Categories category;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        review1 = new Reviews();
-        review1.setId(1L);
-        review1.setComment("Amazing artwork!");
-        artwork1 = new Artwork();
-        artwork1.setId(1L);
-        artwork1.setTitle("Starry Night");
-        artwork1.setDescription("Starry Night");
-        artist=new Users();
-        artist.setId(1L);
-        artist.setUsername("John");
-        artist.setPassword("password1");
-        artist.setEmail("email1@gmail.com");
-        artist.setRole(Role.ARTIST);
-        artwork1.setArtist(artist);
-        artwork1.setPrice(new BigDecimal(500));
-        artwork1.setImageUrl("imageurl1.com");
-        category=new Categories();
-        category.setId(1L);
-        category.setName("Painting");
-        artwork1.setCategories(category);
-        review1.setArtwork(artwork1);
-        review1.setRating(5);
+        user = new Users("john_doe", "password123", Role.USER, "john@example.com");
+        user.setId(1L);
 
-        review2 = new Reviews();
+        artwork1 = new Artwork(
+                "Starry Night",
+                "Famous painting",
+                new BigDecimal("1000"),
+                "http://example.com/image.jpg",
+                user,
+                null
+        );
+        artwork1.setId(100L);
+
+        review1 = new Reviews(user, artwork1, 5, "Amazing artwork!");
+        review1.setId(1L);
+
+        artwork2 = new Artwork(
+                "Night",
+                "painting",
+                new BigDecimal("500"),
+                "http://example.com/imagenight.jpg",
+                user,
+                null
+        );
+        artwork2.setId(200L);
+
+        review2 = new Reviews(user, artwork2, 4, "I like it");
         review2.setId(2L);
-        review2.setComment("Loved it!");
-        artwork2 = new Artwork();
-        artwork2.setTitle("Mona Lisa");
-        artwork2.setDescription("Mona Lisa");
-        artwork2.setArtist(artist);
-        artwork2.setPrice(new BigDecimal(300));
-        artwork2.setImageUrl("imageurl2.com");
-        artwork2.setCategories(category);
-        review2.setArtwork(artwork2);
-        review2.setRating(4);
+
     }
 
     @Test

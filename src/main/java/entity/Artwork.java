@@ -26,7 +26,6 @@ import jakarta.validation.constraints.Positive;
 @Table(name = "artworks")
 public class Artwork {
 
-    // Getters & Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

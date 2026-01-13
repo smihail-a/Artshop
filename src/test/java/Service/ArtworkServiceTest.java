@@ -38,33 +38,31 @@ class ArtworkServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        artwork1 = new Artwork();
-        artwork1.setId(1L);
-        artwork1.setTitle("Starry Night");
-        artwork1.setDescription("Starry Night");
-        artist=new Users();
+        artist = new Users("john_doe", "password123", Role.USER, "john@example.com");
         artist.setId(1L);
-        artist.setUsername("John");
-        artist.setPassword("password1");
-        artist.setEmail("email1@gmail.com");
-        artist.setRole(Role.ARTIST);
-        artwork1.setArtist(artist);
-        artwork1.setPrice(new BigDecimal(500));
-        artwork1.setImageUrl("imageurl1.com");
-        category=new Categories();
+        category = new Categories("Abstract");
         category.setId(1L);
-        category.setName("Painting");
-        artwork1.setCategories(category);
+        artwork1 = new Artwork(
+                "Starry Night",
+                "Famous painting",
+                new BigDecimal("1000"),
+                "http://example.com/image.jpg",
+                artist,
+                category
+        );
+        artwork1.setId(10L);
 
 
-        artwork2 = new Artwork();
-        artwork2.setId(2L);
-        artwork2.setTitle("Mona Lisa");
-        artist=new Users();
-        artwork2.setArtist(artist);
-        artwork2.setPrice(new BigDecimal(300));
-        artwork2.setImageUrl("imageurl2.com");
-        artwork2.setCategories(category);
+        artwork2 = new Artwork(
+                "Night",
+                "New painting",
+                new BigDecimal("500"),
+                "http://example.com/image3.jpg",
+                artist,
+                category
+        );
+        artwork2.setId(11L);
+
 
     }
 

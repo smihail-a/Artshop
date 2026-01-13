@@ -17,7 +17,6 @@ import lombok.Setter;
 @Table(name = "orders")
 public class Order {
 
-    // Getters & Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
