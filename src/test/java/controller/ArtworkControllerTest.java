@@ -46,17 +46,23 @@ class ArtworkControllerTest {
 
     @Test
     void testCreateArtwork() throws Exception {
-        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
-        user.setId(1L);
-        Artwork artwork = new Artwork(
-                "Starry Night",
-                "Famous painting",
-                new BigDecimal("1000"),
-                "http://example.com/image.jpg",
-                user,
-                null
-        );
-        artwork.setId(10L);
+        Artwork artwork = new Artwork();
+        artwork.setId(1L);
+        artwork.setTitle("Starry Night");
+        artwork.setDescription("Starry Night");
+        artist=new Users();
+        artist.setId(1L);
+        artist.setUsername("John");
+        artist.setPassword("password1");
+        artist.setEmail("email1@gmail.com");
+        artist.setRole(Role.ARTIST);
+        artwork.setArtist(artist);
+        artwork.setPrice(new BigDecimal(500));
+        artwork.setImageUrl("imageurl1.com");
+        Categories category = new Categories();
+        category.setId(1L);
+        category.setName("Painting");
+        artwork.setCategories(category);
 
         when(artworkService.createArtwork(any(Artwork.class))).thenReturn(artwork);
 
@@ -67,23 +73,28 @@ class ArtworkControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.title").value("Starry Night"));
 
-
         verify(artworkService, times(1)).createArtwork(any(Artwork.class));
     }
 
     @Test
     void testGetAllArtworks() throws Exception {
-        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
-        user.setId(1L);
-        Artwork artwork = new Artwork(
-                "Starry Night",
-                "Famous painting",
-                new BigDecimal("1000"),
-                "http://example.com/image.jpg",
-                user,
-                null
-        );
-        artwork.setId(10L);
+        Artwork artwork = new Artwork();
+        artwork.setId(1L);
+        artwork.setTitle("Mona Lisa");
+        artwork.setDescription("Mona Lisa");
+        artist=new Users();
+        artist.setId(1L);
+        artist.setUsername("John");
+        artist.setPassword("password1");
+        artist.setEmail("email1@gmail.com");
+        artist.setRole(Role.ARTIST);
+        artwork.setArtist(artist);
+        artwork.setPrice(new BigDecimal(300));
+        artwork.setImageUrl("imageurl2.com");
+        Categories category = new Categories();
+        category.setId(1L);
+        category.setName("Painting");
+        artwork.setCategories(category);
 
 
         when(artworkService.getAllArtworks()).thenReturn(List.of(artwork));
@@ -98,17 +109,23 @@ class ArtworkControllerTest {
 
     @Test
     void testGetArtworkById() throws Exception {
-        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
-        user.setId(1L);
-        Artwork artwork = new Artwork(
-                "",
-                "Guernica",
-                new BigDecimal("1000"),
-                "http://example.com/image.jpg",
-                user,
-                null
-        );
+        Artwork artwork = new Artwork();
         artwork.setId(1L);
+        artwork.setTitle("Guernica");
+        artwork.setDescription("Guernica");
+        artist=new Users();
+        artist.setId(1L);
+        artist.setUsername("John");
+        artist.setPassword("password1");
+        artist.setEmail("email1@gmail.com");
+        artist.setRole(Role.ARTIST);
+        artwork.setArtist(artist);
+        artwork.setPrice(new BigDecimal(300));
+        artwork.setImageUrl("imageurl3.com");
+        Categories category = new Categories();
+        category.setId(1L);
+        category.setName("Painting");
+        artwork.setCategories(category);
 
         when(artworkService.getArtworkById(1L)).thenReturn(artwork);
 
@@ -122,17 +139,23 @@ class ArtworkControllerTest {
 
     @Test
     void testSearchByTitle() throws Exception {
-        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
-        user.setId(1L);
-        Artwork artwork = new Artwork(
-                "Sunflowers",
-                "Famous painting",
-                new BigDecimal("1000"),
-                "http://example.com/image.jpg",
-                user,
-                null
-        );
+        Artwork artwork = new Artwork();
         artwork.setId(1L);
+        artwork.setTitle("Sunflowers");
+        artwork.setDescription("Sunflowers");
+        artist=new Users();
+        artist.setId(1L);
+        artist.setUsername("John");
+        artist.setPassword("password1");
+        artist.setEmail("email1@gmail.com");
+        artist.setRole(Role.ARTIST);
+        artwork.setArtist(artist);
+        artwork.setPrice(new BigDecimal(300));
+        artwork.setImageUrl("imageurl4.com");
+        Categories category = new Categories();
+        category.setId(1L);
+        category.setName("Painting");
+        artwork.setCategories(category);
 
         when(artworkService.searchByTitle("Sun"))
                 .thenReturn(List.of(artwork));
@@ -148,19 +171,23 @@ class ArtworkControllerTest {
 
     @Test
     void testGetByCategory() throws Exception {
-        Users user = new Users("john_doe", "password123", Role.USER, "john@example.com");
-        user.setId(1L);
-        Categories category = new Categories("Abstract");
+        Artwork artwork = new Artwork();
+        artwork.setId(1L);
+        artwork.setTitle("Abstract");
+        artwork.setDescription("Abstract");
+        artist=new Users();
+        artist.setId(1L);
+        artist.setUsername("John");
+        artist.setPassword("password1");
+        artist.setEmail("email1@gmail.com");
+        artist.setRole(Role.ARTIST);
+        artwork.setArtist(artist);
+        artwork.setPrice(new BigDecimal(300));
+        artwork.setImageUrl("imageurl5.com");
+        Categories category = new Categories();
         category.setId(1L);
-        Artwork artwork = new Artwork(
-                "Starry Night",
-                "Famous painting",
-                new BigDecimal("1000"),
-                "http://example.com/image.jpg",
-                user,
-                category
-        );
-        artwork.setId(10L);
+        category.setName("Painting");
+        artwork.setCategories(category);
 
         when(artworkService.getByCategory(10L))
                 .thenReturn(List.of(artwork));
